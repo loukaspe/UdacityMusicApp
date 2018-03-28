@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/listPadding"
+        android:paddingBottom="@dimen/listPadding">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/songStyle"
+            android:text="Song" />
+
+        <TextView
+            android:id="@+id/singer"
+            style="@style/songStyle"
+            android:paddingLeft="@dimen/listPadding"
+            android:paddingStart="@dimen/listPadding"
+            android:text="Singer" />
+
+        <TextView
+            android:id="@+id/album"
+            style="@style/songStyle"
+            android:paddingLeft="@dimen/listPadding"
+            android:paddingStart="@dimen/listPadding"
+            android:text="Album" />
+
+        <TextView
+            android:id="@+id/duration"
+            style="@style/songStyle"
+            android:paddingLeft="@dimen/listPadding"
+            android:paddingStart="@dimen/listPadding"
+            android:text="Duration" />
+    </LinearLayout>
+</HorizontalScrollView>
+
+

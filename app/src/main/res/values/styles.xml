@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mediumGray</item>
+        <item name="colorPrimaryDark">@color/darkGray</item>
+        <item name="colorAccent">@color/lightGreen</item>
+        <item name="android:windowBackground">@color/darkGray</item>
+    </style>
+
+    <style name="titleStyle" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/darkGray</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/titleTextSize</item>
+    </style>
+
+    <style name="startButtonStyle" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">@dimen/startButtonSize</item>
+        <item name="android:layout_height">@dimen/startButtonSize</item>
+        <item name="android:textSize">@dimen/startButtonTextSize</item>
+        <item name="android:layout_margin">@dimen/startButtonPadding</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/iconPadding</item>
+    </style>
+
+    <style name="startButtonStyle.red">
+        <item name="android:textColor">@color/darkRed</item>
+        <item name="android:background">@drawable/rounded_button_red</item>
+    </style>
+
+    <style name="startButtonStyle.yellow">
+        <item name="android:textColor">@color/darkYellow</item>
+        <item name="android:background">@drawable/rounded_button_yellow</item>
+    </style>
+
+    <style name="startButtonStyle.white">
+        <item name="android:textColor">@color/mediumGray</item>
+        <item name="android:background">@drawable/rounded_button_white</item>
+    </style>
+
+    <style name="startButtonStyle.gray">
+        <item name="android:textColor">@color/lightGray</item>
+        <item name="android:background">@drawable/rounded_button_gray</item>
+    </style>
+
+    <style name="songStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="songStyleII">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/playingNowTextSize</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+</resources>

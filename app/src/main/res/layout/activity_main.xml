@@ -1,0 +1,56 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGray"
+    android:padding="@dimen/layoutPadding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/titleStyle"
+            android:drawableTop="@drawable/play_logo"
+            android:drawablePadding="@dimen/titleLogoPadding"
+            android:text="@string/title" />
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/tablePadding">
+
+            <TableRow android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/playingNow"
+                    style="@style/startButtonStyle.red"
+                    android:drawableTop="@drawable/play_icon"
+                    android:text="@string/playing_now" />
+
+                <Button
+                    android:id="@+id/search"
+                    style="@style/startButtonStyle.yellow"
+                    android:drawableTop="@drawable/search_icon"
+                    android:text="@string/search" />
+            </TableRow>
+
+            <TableRow android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/browse"
+                    style="@style/startButtonStyle.white"
+                    android:drawableTop="@drawable/browse_icon"
+                    android:text="@string/browse" />
+
+                <Button
+                    android:id="@+id/download"
+                    style="@style/startButtonStyle.gray"
+                    android:drawableTop="@drawable/download_icon"
+                    android:text="@string/download" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

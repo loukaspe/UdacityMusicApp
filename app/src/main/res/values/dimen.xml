@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="startButtonSize">175dp</dimen>
+    <dimen name="startButtonPadding">8dp</dimen>
+    <dimen name="viewSize">2dp</dimen>
+    <dimen name="layoutPadding">16dp</dimen>
+    <dimen name="listPadding">8dp</dimen>
+    <dimen name="iconPadding">36dp</dimen>
+    <dimen name="tablePadding">16dp</dimen>
+    <dimen name="startButtonTextSize">20sp</dimen>
+    <dimen name="titleTextSize">24sp</dimen>
+    <dimen name="titleLogoPadding">8dp</dimen>
+    <dimen name="smallButton">75dp</dimen>
+    <dimen name="largeButton">100dp</dimen>
+    <dimen name="playButtonPadding">48dp</dimen>
+    <dimen name="playingNowTextSize">18sp</dimen>
+</resources>

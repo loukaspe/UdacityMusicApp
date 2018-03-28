@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">myMusicApp</string>
+    <string name="title">Music Player</string>
+    <string name="playing_now">Playing Now</string>
+    <string name="search">Search</string>
+    <string name="download">Downloaded</string>
+    <string name="browse">Browse</string>
+    <string name="songTitle">Title</string>
+    <string name="songSinger">Singer</string>
+    <string name="songAlbum">Album</string>
+    <string name="songDuration">Duration</string>
+    <string name="addSong">Song Added to Downloads</string>
+    <string name="deleteSong">Song Deleted From Downloads</string>
+    <string name="searchEditText">Type Songs\'s Name</string>
+    <string name="noSong">There is no such Song</string>
+</resources>
