@@ -3,6 +3,7 @@ package com.example.android.mymusicapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,14 +33,14 @@ public class SongAdapter extends ArrayAdapter<Song> {
      * to populate into the lists.
      *
      * @param context The current context. Used to inflate the layout file.
-     * @param songs   A List of AndroidFlavor objects to display in a list
+     * @param Songs   A List of AndroidFlavor objects to display in a list
      */
-    public SongAdapter(Activity context, ArrayList<Song> songs) {
+    public SongAdapter(Activity context, ArrayList<Song> Songs) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
-        super(context, 0, songs);
+        super(context, 0, Songs);
     }
 
     /**
@@ -116,11 +117,38 @@ public class SongAdapter extends ArrayAdapter<Song> {
         // set this text on the number TextView
         singerText.setText(currentSong.getSinger());
 
+        // Find the TextView in the list_item.xml layout with the ID version_number
+        Button download = (Button) listItemView.findViewById(R.id.downloadButton);
+        // Get the version number from the current AndroidFlavor object and
+        // set this text on the number TextView
+        if (currentSong.getDownloaded() == true) {
+            download.setCompoundDrawablesWithIntrinsicBounds(null, null, getContext().getResources().getDrawable(R.drawable.download_icon_true), null);
+            Toast.makeText(getContext(), "skata",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            download.setCompoundDrawablesWithIntrinsicBounds(null, null, getContext().getResources().getDrawable(R.drawable.download_icon_false), null);
+        }
+
+
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
         return listItemView;
     }
 
+//    // Function to check the state of the Current Song
+//    public boolean checkSongIfDownloaded(Song checkSong) {
+//        boolean check = false;
+//        ArrayList<Song> songs = mySharedPreferences.getSongList("songListAdapter", activity);
+//        if (songs != null) {
+//            for (Song song : songs) {
+//                if (song.equals(checkSong)) {
+//                    check = true;
+//                    break;
+//                }
+//            }
+//        }
+//        return check;
+//    }
 //    // Functions Override to keep the Song List after Screen Rotation
 //    @Override
 //    public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -146,6 +174,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
 //
 //            }
 //        }
-//    }
 
 }
+
+
+

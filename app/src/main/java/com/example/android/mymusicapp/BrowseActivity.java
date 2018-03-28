@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -72,7 +73,7 @@ public class BrowseActivity extends AppCompatActivity {
     }
 
     //Function to keep the boolean values of Downloaded of the songs
-    public boolean[] getSongsDownloaded() {
+    public boolean[] getSongsDownloadedState() {
         int size = Songs.size();
         boolean[] array = new boolean[size];
         for (int i = 0; i < size; i++) {
@@ -81,31 +82,31 @@ public class BrowseActivity extends AppCompatActivity {
         return array;
     }
 
-    // Functions Override to keep the Song List after Screen Rotation
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        // Save UI state changes to the savedInstanceState.
-        // This bundle will be passed to onCreate if the process is
-        // killed and restarted.
-        savedInstanceState.putBooleanArray("boolean", getSongsDownloaded());
-        // etc.
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        for (int i = 0; i < Songs.size(); i++) {
-            boolean temp = savedInstanceState.getBooleanArray("boolean")[i];
-            if (temp == false) {
-                adapter.setSongsDownloaded(false, Songs.get(i), adapter.download);
-            } else {
-                adapter.setSongsDownloaded(true, Songs.get(i), adapter.download);
-
-            }
-        }
-    }
+//    // Functions Override to keep the Song List after Screen Rotation
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        super.onSaveInstanceState(savedInstanceState);
+//        // Save UI state changes to the savedInstanceState.
+//        // This bundle will be passed to onCreate if the process is
+//        // killed and restarted.
+//        savedInstanceState.putBooleanArray("boolean", getSongsDownloaded());
+//        // etc.
+//    }
+//
+//    @Override
+//    public void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        // Restore UI state from the savedInstanceState.
+//        // This bundle has also been passed to onCreate.
+//        for (int i = 0; i < Songs.size(); i++) {
+//            boolean temp = savedInstanceState.getBooleanArray("boolean")[i];
+//            if (temp == false) {
+//                adapter.setSongsDownloaded(false, Songs.get(i), adapter.download);
+//            } else {
+//                adapter.setSongsDownloaded(true, Songs.get(i), adapter.download);
+//
+//            }
+//        }
+//    }
 
 }

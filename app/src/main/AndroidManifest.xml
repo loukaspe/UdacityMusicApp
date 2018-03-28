@@ -21,7 +21,8 @@
         <activity   android:name=".SearchActivity"
             android:label="@string/search"/>
         <activity   android:name=".BrowseActivity"
-            android:label="@string/browse"/>
+            android:label="@string/browse"
+            android:configChanges="orientation|screenSize"/>
         <activity   android:name=".DownloadActivity"
             android:label="@string/download"/>
     </application>

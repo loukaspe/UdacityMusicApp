@@ -1,6 +1,7 @@
 package com.example.android.mymusicapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -21,8 +22,7 @@ import java.util.ArrayList;
  */
 public class mySharedPreferences {
 
-    static public void savePlayingSong(Song playingSong, String key, Activity activity)
-    {
+    static public void savePlayingSong(Song playingSong, String key, Activity activity) {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -31,8 +31,7 @@ public class mySharedPreferences {
         prefsEditor.apply();
     }
 
-    static public void saveSongList(ArrayList<Song> myList, String key, Activity activity)
-    {
+    static public void saveSongList(ArrayList<Song> myList, String key, Activity activity) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -41,20 +40,20 @@ public class mySharedPreferences {
         editor.apply();
     }
 
-    static public ArrayList<Song> getSongList(String key, Activity activity){
+    static public ArrayList<Song> getSongList(String key, Activity activity) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         Gson gson = new Gson();
         String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<Song>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Song>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
-    static public Song getPlayingSong(String key, Activity activity){
+    static public Song getPlayingSong(String key, Activity activity) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         Gson gson = new Gson();
         String json = prefs.getString(key, null);
         Song obj = gson.fromJson(json, Song.class);
         return obj;
     }
-
 }
