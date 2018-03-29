@@ -44,9 +44,10 @@ public class PlayingNowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_now_layout);
 
-        // Code to set the Playing Now song Info to the Playing Now Song
+        // Code to set the Playing Now song Info to the Playing Now Song from the Shared Preferences
         playingNowSong = mySharedPreferences.getPlayingSong("playingNow", this);
 
+        // Then Find each field in the XML and set it to the Playing Song's
         songsName = (TextView) findViewById(R.id.name);
         songsName.setText(playingNowSong.getName());
 
@@ -99,10 +100,8 @@ public class PlayingNowActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 position = -1;
-                for(int i = 0; i < songs.size(); i++)
-                {
-                    if(playingNowSong.equals(songs.get(i)))
-                    {
+                for (int i = 0; i < songs.size(); i++) {
+                    if (playingNowSong.equals(songs.get(i))) {
                         position = i;
                     }
                 }
@@ -131,10 +130,8 @@ public class PlayingNowActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 position = -1;
-                for(int i = 0; i < songs.size(); i++)
-                {
-                    if(playingNowSong.equals(songs.get(i)))
-                    {
+                for (int i = 0; i < songs.size(); i++) {
+                    if (playingNowSong.equals(songs.get(i))) {
                         position = i;
                     }
                 }

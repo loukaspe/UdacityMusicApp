@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         playingNow.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the Playing Now View is clicked
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent playingNowIntent = new Intent(MainActivity.this, PlayingNowActivity.class);
                 startActivity(playingNowIntent);
             }
@@ -34,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the Playing Now View is clicked
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
             }
@@ -48,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         browse.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the Playing Now View is clicked
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent browseIntent = new Intent(MainActivity.this, BrowseActivity.class);
                 startActivity(browseIntent);
             }
@@ -62,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         download.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the Playing Now View is clicked
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent downloadIntent = new Intent(MainActivity.this, DownloadActivity.class);
                 startActivity(downloadIntent);
             }

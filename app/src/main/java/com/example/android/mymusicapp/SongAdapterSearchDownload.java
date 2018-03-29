@@ -1,11 +1,10 @@
 package com.example.android.mymusicapp;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,13 +15,13 @@ import java.util.Locale;
  * Created by loukaswhatdup on 27/3/2018.
  */
 
-    // Class that inherits the SongAdapter that will be used in the search activity. The layout that
-    // this class has does not have a download button as the base SongAdapter
-public class SongAdapterSearch extends SongAdapter {
-    private static final String LOG_TAG = SongAdapter.class.getSimpleName();
+// Class that inherits the SongAdapterBrowse that will be used in the Search and in the Download activity. The layout that
+// this class has does not have a download button as the base SongAdapterBrowse
+public class SongAdapterSearchDownload extends SongAdapterBrowse {
+    private static final String LOG_TAG = SongAdapterBrowse.class.getSimpleName();
 
-    SongAdapterSearch(Activity context, ArrayList<Song> songs) {
-        super(context, songs);
+    SongAdapterSearchDownload(Activity context, ArrayList<Song> songs, Song playingSong) {
+        super(context, songs, playingSong);
     }
 
     @Override
@@ -31,38 +30,43 @@ public class SongAdapterSearch extends SongAdapter {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item_layout_search, parent, false);
+                    R.layout.list_item_layout_search_download, parent, false);
 
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
+        // Find the Linear Layout of the XML
+        LinearLayout layout = (LinearLayout) listItemView.findViewById(R.id.layoutSearchDownload);
+
+        // Set a Click Listener fot the Linear Layout that represents a Song
+        layout.setOnClickListener(new View.OnClickListener() {
+            // The code in this method will be executed when the Download Button is clicked
+            @Override
+            public void onClick(View view) {
+                // The clickable Song will become the Playing Song
+                Song currentSong = getItem(position);
+                playingNow = currentSong;
+                mySharedPreferences.savePlayingSong(playingNow, "playingNow", context);
+                Toast.makeText(getContext(), getContext().getResources().getText(R.string.changeSong),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Find the Current song of the list and set each field of the Layout to the Current's Fields
         Song currentSong = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
         TextView nameText = (TextView) listItemView.findViewById(R.id.name);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
         nameText.setText(currentSong.getName());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView albumText = (TextView) listItemView.findViewById(R.id.album);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         albumText.setText(currentSong.getAlbum());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView durationText = (TextView) listItemView.findViewById(R.id.duration);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         durationText.setText(String.valueOf(currentSong.getDuration()));
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView singerText = (TextView) listItemView.findViewById(R.id.singer);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         singerText.setText(currentSong.getSinger());
 
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
+        // Return the whole list item layout
         // so that it can be shown in the ListView
         return listItemView;
     }
@@ -70,7 +74,7 @@ public class SongAdapterSearch extends SongAdapter {
     // Function to filter the Searches, copied from http://abhiandroid.com/ui/searchview and slightly changed
     public void filter(String text, ArrayList<Song> songs, ArrayList<Song> searchedSongs) {
         text = text.toLowerCase(Locale.getDefault());
-            searchedSongs.clear();
+        searchedSongs.clear();
 
         if (text.length() == 0) {
             searchedSongs.addAll(songs);
@@ -83,5 +87,14 @@ public class SongAdapterSearch extends SongAdapter {
         }
 
         notifyDataSetChanged();
+    }
+
+    // Function to add the Downloaded Songs to the Downloads
+    public void addToDownloads(ArrayList<Song> songs, ArrayList<Song> downloads) {
+        for (int i = 0; i < songs.size(); i++) {
+            if (songs.get(i).getDownloaded() == true) {
+                downloads.add(songs.get(i));
+            }
+        }
     }
 }

@@ -13,4 +13,5 @@
     <dimen name="largeButton">100dp</dimen>
     <dimen name="playButtonPadding">48dp</dimen>
     <dimen name="playingNowTextSize">18sp</dimen>
+    <dimen name="dividerHeight">2dp</dimen>
 </resources>

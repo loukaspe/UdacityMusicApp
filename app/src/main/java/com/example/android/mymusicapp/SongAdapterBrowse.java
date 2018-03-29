@@ -1,31 +1,30 @@
 package com.example.android.mymusicapp;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by loukaswhatdup on 23/3/2018.
  */
 
-public class SongAdapter extends ArrayAdapter<Song> {
+public class SongAdapterBrowse extends ArrayAdapter<Song> {
 
-    private static final String LOG_TAG = SongAdapter.class.getSimpleName();
+    private static final String LOG_TAG = SongAdapterBrowse.class.getSimpleName();
+
+    // Variables for the Songs list, the Playing Song and the Activity
+    Activity context;
+    ArrayList<Song> songs;
+    Song playingNow;
 
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -35,12 +34,11 @@ public class SongAdapter extends ArrayAdapter<Song> {
      * @param context The current context. Used to inflate the layout file.
      * @param Songs   A List of AndroidFlavor objects to display in a list
      */
-    public SongAdapter(Activity context, ArrayList<Song> Songs) {
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-        // the second argument is used when the ArrayAdapter is populating a single TextView.
-        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
-        // going to use this second argument, so it can be any value. Here, we used 0.
+    public SongAdapterBrowse(Activity context, ArrayList<Song> Songs, Song playingSong) {
         super(context, 0, Songs);
+        this.context = context;
+        songs = Songs;
+        playingNow = playingSong;
     }
 
     /**
@@ -58,10 +56,27 @@ public class SongAdapter extends ArrayAdapter<Song> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item_layout, parent, false);
+                    R.layout.list_item_layout_browse, parent, false);
 
             // Find the view that shows the Download Button
             final Button download = (Button) listItemView.findViewById(R.id.downloadButton);
+
+            // Find the Linear Layout of the layout of a Song
+            LinearLayout layout = (LinearLayout) listItemView.findViewById(R.id.layoutBrowse);
+
+            // Set a Click Listener for the Linear Layout that represents a Song
+            layout.setOnClickListener(new View.OnClickListener() {
+                // The code in this method will be executed when the Download Button is clicked
+                @Override
+                public void onClick(View view) {
+                    // The Clickable Song will become the Playing Song
+                    Song currentSong = getItem(position);
+                    playingNow = currentSong;
+                    mySharedPreferences.savePlayingSong(playingNow, "playingNow", context);
+                    Toast.makeText(getContext(), getContext().getResources().getText(R.string.changeSong),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
 
             // Set a Click Listener fot that view
             download.setOnClickListener(new View.OnClickListener() {
@@ -71,110 +86,52 @@ public class SongAdapter extends ArrayAdapter<Song> {
                     // The Button color will change and the song will be added to the Downloaded List
                     Song currentSong = getItem(position);
                     if (currentSong.getDownloaded() == false) {
-                        //setSongsDownloaded(true, currentSong, download);
                         Drawable downloadIcon = getContext().getResources().getDrawable(R.drawable.download_icon_true);
                         download.setCompoundDrawablesWithIntrinsicBounds(null, null, downloadIcon, null);
                         currentSong.setDownloaded(true);
                         Toast.makeText(getContext(), getContext().getResources().getText(R.string.addSong),
                                 Toast.LENGTH_SHORT).show();
+                        mySharedPreferences.saveSongList(songs, "songList", context);
                     } else {
-//                        setSongsDownloaded(false, currentSong, download);
                         Drawable downloadIcon = getContext().getResources().getDrawable(R.drawable.download_icon_false);
                         download.setCompoundDrawablesWithIntrinsicBounds(null, null, downloadIcon, null);
                         currentSong.setDownloaded(false);
                         Toast.makeText(getContext(), getContext().getResources().getText(R.string.deleteSong),
                                 Toast.LENGTH_SHORT).show();
+                        mySharedPreferences.saveSongList(songs, "songList", context);
                     }
                 }
             });
 
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
+        // Find the Current Song of the list, locate each field in the XML and then set it
+        // the same as the Current's Song
         Song currentSong = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
         TextView nameText = (TextView) listItemView.findViewById(R.id.name);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
         nameText.setText(currentSong.getName());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView albumText = (TextView) listItemView.findViewById(R.id.album);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         albumText.setText(currentSong.getAlbum());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView durationText = (TextView) listItemView.findViewById(R.id.duration);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         durationText.setText(String.valueOf(currentSong.getDuration()));
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         TextView singerText = (TextView) listItemView.findViewById(R.id.singer);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         singerText.setText(currentSong.getSinger());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
         Button download = (Button) listItemView.findViewById(R.id.downloadButton);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         if (currentSong.getDownloaded() == true) {
             download.setCompoundDrawablesWithIntrinsicBounds(null, null, getContext().getResources().getDrawable(R.drawable.download_icon_true), null);
-            Toast.makeText(getContext(), "skata",
-                    Toast.LENGTH_SHORT).show();
         } else {
             download.setCompoundDrawablesWithIntrinsicBounds(null, null, getContext().getResources().getDrawable(R.drawable.download_icon_false), null);
         }
 
-
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
+        // Return the whole list item layout
         // so that it can be shown in the ListView
         return listItemView;
     }
-
-//    // Function to check the state of the Current Song
-//    public boolean checkSongIfDownloaded(Song checkSong) {
-//        boolean check = false;
-//        ArrayList<Song> songs = mySharedPreferences.getSongList("songListAdapter", activity);
-//        if (songs != null) {
-//            for (Song song : songs) {
-//                if (song.equals(checkSong)) {
-//                    check = true;
-//                    break;
-//                }
-//            }
-//        }
-//        return check;
-//    }
-//    // Functions Override to keep the Song List after Screen Rotation
-//    @Override
-//    public void onSaveInstanceState(Bundle savedInstanceState) {
-//        super.onSaveInstanceState(savedInstanceState);
-//        // Save UI state changes to the savedInstanceState.
-//        // This bundle will be passed to onCreate if the process is
-//        // killed and restarted.
-//        savedInstanceState.putBooleanArray("boolean", getSongsDownloaded());
-//        // etc.
-//    }
-//
-//    @Override
-//    public void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        // Restore UI state from the savedInstanceState.
-//        // This bundle has also been passed to onCreate.
-//        for (int i = 0; i < Songs.size(); i++) {
-//            boolean temp = savedInstanceState.getBooleanArray("boolean")[i];
-//            if (temp == false) {
-//                adapter.setSongsDownloaded(false, Songs.get(i), adapter.download);
-//            } else {
-//                adapter.setSongsDownloaded(true, Songs.get(i), adapter.download);
-//
-//            }
-//        }
-
 }
 
 

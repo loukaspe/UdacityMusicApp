@@ -5,11 +5,11 @@
     android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/layoutBrowse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/listPadding"
-        android:paddingBottom="@dimen/listPadding">
+        android:clickable="true"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/name"
@@ -36,6 +36,18 @@
             android:paddingLeft="@dimen/listPadding"
             android:paddingStart="@dimen/listPadding"
             android:text="Duration" />
+
+        <Button
+            android:id="@+id/downloadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/darkGray"
+            android:drawableEnd="@drawable/download_icon_false"
+            android:drawableRight="@drawable/download_icon_false"
+            android:paddingLeft="@dimen/listPadding"
+            android:paddingStart="@dimen/listPadding"
+            android:singleLine="true" />
+
     </LinearLayout>
 </HorizontalScrollView>
 

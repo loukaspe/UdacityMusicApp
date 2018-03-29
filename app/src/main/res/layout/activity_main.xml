@@ -11,8 +11,8 @@
 
         <TextView
             style="@style/titleStyle"
-            android:drawableTop="@drawable/play_logo"
             android:drawablePadding="@dimen/titleLogoPadding"
+            android:drawableTop="@drawable/play_logo"
             android:text="@string/title" />
 
 

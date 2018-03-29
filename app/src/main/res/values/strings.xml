@@ -13,4 +13,5 @@
     <string name="deleteSong">Song Deleted From Downloads</string>
     <string name="searchEditText">Type Songs\'s Name</string>
     <string name="noSong">There is no such Song</string>
+    <string name="changeSong">New Playing Song Set</string>
 </resources>
