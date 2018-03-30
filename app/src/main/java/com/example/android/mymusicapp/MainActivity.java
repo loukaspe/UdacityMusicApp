@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -64,5 +66,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(downloadIntent);
             }
         });
+
+        // Creation of the Song List and playing Song to be available for all the other activities
+        ArrayList<Song> Songs = new ArrayList<Song>();
+        Songs.add(new Song("God's Plan", "God", 1.26, "Drake"));
+        Songs.add(new Song("All The Stars", "World", 1.37, "Kendrick Lamar"));
+        Songs.add(new Song("RockStar", "Music", 1.45, "Post Malone"));
+        Songs.add(new Song("Havana", "First", 1.55, "Camila Cabello"));
+        Songs.add(new Song("Say Something", "Friends", 2.25, "Justin Timberlake"));
+        Songs.add(new Song("For You", "Myself", 3.46, "Rita Ora"));
+        Songs.add(new Song("Congratulations", "Music", 2.16, "Post Malone"));
+        Songs.add(new Song("Make It Rain", "Perfect", 1.48, "Ed Sheeran"));
+        Songs.add(new Song("Attention", "Best", 2.36, "Charlie Puth"));
+        Songs.add(new Song("Perfect", "Perfect", 3.22, "Ed Sheeran"));
+
+        Song playingNowSong = Songs.get(0);
+
+        // Save them to the Shared Preferences
+        mySharedPreferences.savePlayingSong(playingNowSong, "playingNow", this);
+        mySharedPreferences.saveSongList(Songs, "songList", this);
     }
 }

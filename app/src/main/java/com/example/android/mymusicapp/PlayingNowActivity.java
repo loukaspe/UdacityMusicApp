@@ -44,6 +44,9 @@ public class PlayingNowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playing_now_layout);
 
+        // Code to retrieve the Song List in order to make the Next and Previous Songs to work
+        songs = mySharedPreferences.getSongList("songList", this);
+
         // Code to set the Playing Now song Info to the Playing Now Song from the Shared Preferences
         playingNowSong = mySharedPreferences.getPlayingSong("playingNow", this);
 
@@ -60,12 +63,8 @@ public class PlayingNowActivity extends AppCompatActivity {
         songsDuration = (TextView) findViewById(R.id.duration);
         songsDuration.setText(String.valueOf(playingNowSong.getDuration()));
 
-        // Code to retrieve the Song List in order to make the Next and Previous Songs to work
-        songs = mySharedPreferences.getSongList("songList", this);
-
         // Then we save the PlayingNow song again here in case we changed it
         mySharedPreferences.savePlayingSong(playingNowSong, "playingNow", this);
-
 
         // Find the view that shows the PLay and the Pause Button: We want the the
         // user clicks this Button to change from Play to Pause and the opposite
